@@ -54,28 +54,47 @@ export class LinkedList {
     return currentNode;
   }
 
-  pop() {}
+  pop() {
+    let node = this.at(this.length - 2);
+    this.tail = node;
+    this.tail.next = null;
+    this.length--;
+  }
+
+  contains(value) {
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return true;
+      } else {
+        currentNode = currentNode.next;
+      }
+    }
+    return false;
+  }
+
+  find(value) {
+    let count = 0;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      if (currentNode.value === value) {
+        return count;
+      } else {
+        currentNode = currentNode.next;
+        count++;
+      }
+    }
+    return null;
+  }
+
+  toString() {
+    let strList = ``;
+    let currentNode = this.head;
+    while (currentNode !== null) {
+      strList = strList + ` ( ${currentNode.value} ) ->`;
+      currentNode = currentNode.next;
+    }
+    strList = strList + ` null`;
+    return strList;
+  }
 }
-
-const myList = new LinkedList();
-myList.append("perro");
-myList.append("gato");
-myList.append("caballo");
-myList.prepend("gallo");
-
-console.log(myList);
-const mySize = myList.size();
-console.log(mySize);
-
-const myHead = myList.getHead();
-console.log(myHead);
-
-const myTail = myList.getTail();
-console.log(myTail);
-
-const atRes = myList.at(0);
-console.log(atRes);
-
-myList.pop();
-
-console.log(myList);
